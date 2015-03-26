@@ -76,7 +76,9 @@ public class GetScoreTools {
 		float totalCredit=0;
 		Map<String,String> courses=new HashMap<String,String>();
 		for(Map<String, String> course:courseInfo){
-			courses.put(course.get("name"),course.get("credit")+"-"+course.get("score"));
+			if(Float.parseFloat(course.get("score"))>=60){
+				courses.put(course.get("name"),course.get("credit")+"-"+course.get("score"));
+			}			
 		}
 		Iterator<Entry<String, String>> iter = courses.entrySet().iterator();
 		while (iter.hasNext()){
@@ -94,7 +96,8 @@ public class GetScoreTools {
 		float totalCredit=0;
 		Map<String,String> courses=new HashMap<String,String>();
 		for(Map<String, String> course:courseInfo){
-			if((course.get("type").equals("专业必修")&&!course.get("major").equals("辅修"))||course.get("type").equals("公共必修")){
+			if(((course.get("type").equals("专业必修")&&!course.get("major").equals("辅修"))
+					||course.get("type").equals("公共必修"))&&Float.parseFloat(course.get("score"))>=60){
 				courses.put(course.get("name"),course.get("credit")+"-"+course.get("score"));
 			}
 		}
